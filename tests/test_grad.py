@@ -43,3 +43,13 @@ def test4():
     right_val = 3 * math.exp(3 * x)
 
     assert eq_float(left_val, right_val, e)
+
+def test5():
+    f = ["*3", "exp"]
+    x = 0.002
+    e = 0.00001
+
+    left_val = grad(f, x)
+    right_val = 3 * math.exp(3 * x)
+
+    assert eq_float(left_val, right_val, e)
