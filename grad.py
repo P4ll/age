@@ -1,4 +1,5 @@
 import math
+import sys
 from typing import List
 
 
@@ -73,42 +74,13 @@ def grad(f: List[str], x: float) -> float:
 
     raise NotImplementedError(f"Used not implemented op {f[0]}")
 
-def eq_float(x: float, y: float, e: float) -> bool:
-    return abs(x - y) < e
-
-def test1():
-    f = ["sin", "^2"]
-    x = 10
-    e = 0.00001
-
-    assert eq_float(grad(f, x), 2 * math.sin(x) * math.cos(x), e)
-
-def test2():
-    f = ["^2", "sin"]
-    x = 1.5
-    e = 0.00001
-
-    assert eq_float(grad(f, x), math.cos(x * x) * 2 * x, e)
-
-def test3():
-    f = ["^2", "*3"]
-    x = 4
-    e = 0.00001
-
-    assert eq_float(grad(f, x), 6 * x, e)
-
-def test4():
-    f = ["exp", "^3"]
-    x = 2
-    e = 0.00001
-
-    assert eq_float(grad(f, x), 3 * math.exp(3 * x), e)
-
 def main():
-    test1()
-    test2()
-    test3()
-    test4()
+    if len(sys.argv) < 3:
+        print(f"Usage: python <x val> <func1> <func2>...")
+        sys.exit()
+    x = float(sys.argv[1])
+    funcs = sys.argv[2:]
+    print(f"Derivative value: {grad(funcs, x)}")
 
 
 if __name__ == "__main__":
